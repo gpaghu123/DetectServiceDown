@@ -14,4 +14,5 @@ function sendEventToInstana {
 }
 
 #for each service that should be monitoried, get the status and create an event in Instana if stopped. The Instana backend can then be configued to create an alert
+# change the list below to reflect the ones that need to be monitored. These should be service names as Windows understands the term. 
 get-service -name "wisvc", "wlansvc", "wpnservice", "xblauthmanager", "Wsearch" | ForEach-Object -Process {if ($_.status -eq "Stopped") {sendEventToInstana -ServiceName $_.Name}}
